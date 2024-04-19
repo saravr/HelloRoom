@@ -1,12 +1,19 @@
 package com.example.helloroom
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.helloroom.dao.DocumentsDao
 import com.example.helloroom.dao.SavedDao
+import com.example.helloroom.entity.DocumentEntity
+import com.example.helloroom.entity.SavedEntity
 import java.io.File
 
+@Database(
+    entities = [DocumentEntity::class, SavedEntity::class],
+    version = 1,
+)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun documentsDao(): DocumentsDao
     abstract fun savedDao(): SavedDao

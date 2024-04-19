@@ -70,6 +70,7 @@ dependencies {
 
     // dagger/hilt
     implementation(libs.hilt.android)
+    implementation(libs.hilt.compose)
     kapt(libs.hilt.android.compiler)
 
     implementation(libs.timber)
