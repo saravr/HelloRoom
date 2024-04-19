@@ -1,6 +1,9 @@
-package com.example.helloroom
+package com.example.helloroom.di
 
 import android.content.Context
+import com.example.helloroom.AppDatabase
+import com.example.helloroom.dao.DocumentsDao
+import com.example.helloroom.dao.SavedDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,9 +1,10 @@
-package com.example.helloroom
+package com.example.helloroom.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.helloroom.entity.DocumentEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

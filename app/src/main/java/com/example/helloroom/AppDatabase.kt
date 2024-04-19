@@ -3,6 +3,8 @@ package com.example.helloroom
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.helloroom.dao.DocumentsDao
+import com.example.helloroom.dao.SavedDao
 import java.io.File
 
 abstract class AppDatabase: RoomDatabase() {
