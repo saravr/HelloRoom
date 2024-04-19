@@ -8,6 +8,8 @@ import javax.inject.Inject
 class DocumentRepository @Inject constructor(
     private val documentsDao: DocumentsDao,
 ) {
+    val docuemnts = documentsDao.getDocuments()
+
     suspend fun insertDocuments(documents: List<Document>) {
         val documentEntities = documents.map { DocumentEntity.toEntity(it) }
         documentsDao.insertDocuments(documentEntities)

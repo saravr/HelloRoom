@@ -1,12 +1,23 @@
 package com.example.helloroom
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.helloroom.model.Document
 import com.example.helloroom.model.Saved
 import com.example.helloroom.viewmodel.DocumentsViewModel
@@ -14,14 +25,38 @@ import com.example.helloroom.viewmodel.DocumentsViewModel
 @Composable
 fun DocumentsScreen() {
     val documentsViewModel: DocumentsViewModel = hiltViewModel()
+    val documents = documentsViewModel.documents.collectAsStateWithLifecycle(initialValue = emptyList())
 
     Column(
         modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween,
     ) {
         Button(onClick = {
             seedDB(documentsViewModel)
         }) {
             Text("Seed DB")
+        }
+        Divider()
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1.0f),
+        ) {
+            items(documents.value) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 10.dp),
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Text(it.title, style = MaterialTheme.typography.titleMedium)
+                    Text(it.author, style = MaterialTheme.typography.titleSmall)
+                    Text(it.pageCount.toString(), style = MaterialTheme.typography.titleSmall, color = Color.DarkGray)
+                }
+                Divider(color = Color.LightGray)
+            }
         }
     }
 }
