@@ -1,6 +1,5 @@
 package com.example.helloroom.domain
 
-import androidx.lifecycle.viewModelScope
 import com.example.helloroom.model.Document
 import com.example.helloroom.repository.DocumentRepository
 import com.example.helloroom.repository.SavedRepository
@@ -46,5 +45,8 @@ class GetDocumentsUseCase @Inject constructor(
         }
     }
 
-    suspend fun saveDocument(documentId: Int, state: Boolean) = savedRepository.saveDocument(documentId, state)
+    suspend fun refresh() {
+        savedRepository.refresh()
+        documentRepository.refresh()
+    }
 }
