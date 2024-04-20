@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class DocumentRepository @Inject constructor(
@@ -26,11 +27,17 @@ class DocumentRepository @Inject constructor(
     }
     val documents = documentsDao
         .getDocuments()
-        .map { entityList -> entityList.map { it.fromEntity() } }
+        .map { entityList ->
+            Timber.e("++++ SAVED: MAP docs ent size ${entityList.size}")
+            entityList.map { it.fromEntity() }
+        }
         .stateIn(scope, SharingStarted.Eagerly, emptyList())
 
     val saved = savedDao.getSaved()
-        .map { entityList -> entityList.map { it.fromEntity() } }
+        .map { entityList ->
+            Timber.e("++++ SAVED: MAP saved ent size ${entityList.size}")
+            entityList.map { it.fromEntity() }
+        }
         .stateIn(scope, SharingStarted.Eagerly, emptyList())
 
     suspend fun refresh() {

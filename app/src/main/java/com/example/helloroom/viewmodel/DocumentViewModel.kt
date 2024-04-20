@@ -25,7 +25,10 @@ class DocumentViewModel @Inject constructor(
             val combinedFlow = combine(
                 documentRepository.documents,
                 documentRepository.saved,
-            ) { d, s -> Pair(d, s) }
+            ) { d, s ->
+                Timber.e("++++ VM: TRANSFORM ${d.size} / ${s.size}")
+                Pair(d, s)
+            }
 
             combinedFlow.collectLatest { (documentsList, savedList) ->
                 Timber.e("++++ VM: COLLECT: DOCS ${documentsList.size}, SAVED ${savedList.size}")
