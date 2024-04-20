@@ -1,4 +1,4 @@
-package com.example.helloroom
+package com.example.helloroom.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable

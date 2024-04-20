@@ -1,4 +1,4 @@
-package com.example.helloroom
+package com.example.helloroom.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
