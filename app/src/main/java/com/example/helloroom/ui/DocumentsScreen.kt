@@ -29,12 +29,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.helloroom.viewmodel.DocumentViewModel
+import com.example.helloroom.viewmodel.SavedViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @Composable
 fun DocumentsScreen() {
     val documentViewModel: DocumentViewModel = hiltViewModel()
+    val savedViewModel: SavedViewModel = hiltViewModel()
     val documents = documentViewModel.documents.collectAsStateWithLifecycle(initialValue = emptyList())
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -87,7 +89,7 @@ fun DocumentsScreen() {
                     Icon(
                         modifier = Modifier.clickable {
                             scope.launch {
-                                val result: Int = documentViewModel.saveDocument(it.id, !it.saved)
+                                val result: Int = savedViewModel.saveDocument(it.id, !it.saved)
                                 Timber.e("++++ RESULT $result")
                                 if (result == -1) {
                                     Toast.makeText(context, "Failed to save/unsave", Toast.LENGTH_SHORT).show()
