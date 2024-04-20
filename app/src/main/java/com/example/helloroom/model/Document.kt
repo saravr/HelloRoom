@@ -5,4 +5,5 @@ data class Document(
     val title: String,
     val author: String,
     val pageCount: Int,
+    val saved: Boolean = false,
 )

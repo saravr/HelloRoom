@@ -15,11 +15,17 @@ data class DocumentEntity(
     val author: String,
     @ColumnInfo("page_count")
     val pageCount: Int,
+    @ColumnInfo("saved")
+    val saved: Boolean,
 ) {
+    fun fromEntity(): Document {
+        return Document(id, title, author, pageCount, saved)
+    }
+
     companion object {
         fun toEntity(document: Document): DocumentEntity {
             return DocumentEntity(
-                document.id, document.title, document.author, document.pageCount
+                document.id, document.title, document.author, document.pageCount, document.saved
             )
         }
     }
